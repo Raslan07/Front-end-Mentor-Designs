@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,600&display=swap');
+
+
+:root {
+    --clr-purple: hsl(256, 67%, 59%);
+    --clr-purple-light: hsl(254, 88%, 90%);
+    --clr-yellow: hsl(39, 100%, 71%);
+    --clr-beige: hsl(31, 66%, 93%);
+    --clr-white: hsl(0, 0%, 100%);
+    --clr-text-dark: hsl(0, 0%, 20%);
+    --clr-text-light: hsl(0, 0%, 98%);
+    --font-family-base: "DM Sans", sans-serif;
+    --border-radius-main: 1rem; /* 16px */
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    font-family: var(--font-family-base);
+    color: var(--clr-text-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(1rem, 5vw, 2rem); /* Responsive padding */
+    line-height: 1.4;
+}
+
+
+.bento-grid-container {
+    width: 100%;
+    max-width: 1240px;
+    display: grid;
+    gap: 1.25rem; /* 20px */
+    grid-template-columns: 1fr; /* Single column for mobile */
+}
+
+
+.card {
+    background-color: var(--clr-white);
+    border-radius: var(--border-radius-main);
+    padding: clamp(1.5rem, 4vw, 2rem); /* Responsive padding */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.card h1, .card h2 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.card h1 { font-size: clamp(2rem, 5vw, 3rem); }
+.card h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+.card p { font-size: 1rem; }
+
+.card-img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 1.5rem;
+    align-self: center;
+    border-radius: 0.5rem;
+}
+
+/* Helper classes for text styling */
+.highlight-italic { font-style: italic; color: var(--clr-purple); }
+.highlight-italic-light { font-style: italic; color: var(--clr-white); }
+.highlight-yellow { color: var(--clr-yellow); }
+
+
+.card-create-post { background-color: var(--clr-beige); }
+.card-ai-content, .card-consistent-schedule { background-color: var(--clr-yellow); }
+.card-schedule { background-color: var(--clr-purple-light); }
+
+.card-main-promo, .card-grow-followers {
+    background-color: var(--clr-purple);
+    color: var(--clr-text-light);
+}
+.card-main-promo h1, .card-grow-followers h2 { color: var(--clr-text-light); }
+.card-main-promo { align-items: center; text-align: center; }
+.stars-img { width: 150px; margin: 1rem 0; }
+
+.card-audience-growth h2 { font-size: clamp(3rem, 7vw, 4rem); margin-bottom: 0.5rem; }
+
+
+@media (min-width: 768px) {
+    .bento-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+   
+    .card-main-promo, .card-grow-followers {
+        grid-column: span 2;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .bento-grid-container {
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: minmax(100px, auto);
+        
+        grid-template-areas:
+            "create   promo   promo     schedule"
+            "ai       promo   promo     schedule"
+            "ai       growth  platforms consistent"
+            "followers followers platforms consistent";
+    }
+
+   
+    .card-create-post { grid-area: create; }
+    .card-main-promo { grid-area: promo; justify-content: center; }
+    .card-schedule { grid-area: schedule; }
+    .card-platforms { grid-area: platforms; }
+    .card-consistent-schedule { grid-area: consistent; }
+    .card-audience-growth { grid-area: growth; }
+    .card-grow-followers { 
+        grid-area: followers;
+        flex-direction: row; 
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+    .card-grow-followers .text-content,
+    .card-grow-followers .img-container {
+        flex: 1;
+    }
+    .card-ai-content { grid-area: ai; }
+}
+
+/* Footer styling */
+.attribution {
+    margin-top: 2rem;
+    font-size: 0.875rem;
+    text-align: center;
+    color: #6c757d;
+}
+.attribution a {
+    color: var(--clr-purple);
+    text-decoration: none;
+    font-weight: 600;
+}
+.attribution a:hover {
+    text-decoration: underline;
+}
