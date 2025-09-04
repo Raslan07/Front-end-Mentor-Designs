@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.roboto {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+}
+
+
+*{
+    margin: 0;
+    padding:0 ;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+:root{
+    --Red: hsl(4, 100%, 67%);
+    --Blue1 : hsl(234, 29%, 20%);
+    --Blue2 : hsl(235, 18%, 26%);
+    --Grey: hsl(0, 0%,58%);
+    --White: hsl(0, 0%, 100%);
+}
+
+body{
+    min-height: 100dvh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--Blue2);
+}
+.container{
+    width: 100%;
+    max-width: 980px;
+    display: grid;
+    grid-template-columns:repeat(auto-fill , minmax(50% , 1fr));
+    background-color: white;
+    border-radius: 30px;
+    padding: 1.5rem;
+}
+/* 
+- Mobile: 375px
+- Desktop: 1440px
+ */
+
+ /* Right Side Style */
+.right-side{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+
+/* Left Side Style */
+
+.top-header{
+    width: 100%;
+    padding: 1.5rem;
+    margin-top: 15px;
+    
+}
+.top-header h1{
+    font-size: 4rem;
+    color: var(--Blue1);
+    text-align: center;
+    margin-bottom: 15px ;
+}
+.top-header p{
+    width: 90%;
+    font-weight: 500;
+    margin-left: 10px;
+}
+.mid-header{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-inline: 1.5rem;
+    color: var(--Blue1);
+}
+.mid-header .conditions{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 500;
+    margin-block: 10px;
+}
+.conditions p {
+    margin-left: 20px;
+    margin-top: -1px;
+}
+
+.input-field{
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+
+}
+label{
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+input{
+    width: 100%;
+    height: 65px;
+    border: 1px solid var(--Grey);
+    border-radius: 10px;
+    background-color: rgba(251, 251, 251, 0.503);
+    font-size: 1rem;
+    
+}
+input::placeholder{
+    font-size: 1rem;
+    left: 15px;
+    color: rgba(93, 93, 93, 0.543);
+    position: absolute;    
+}
+input:focus{
+    outline: none;
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.225);
+}
+
+.btn-one{
+    margin: 1.5rem;
+    width: 90%;
+    height: 65px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--Blue1);
+    color: rgba(255, 255, 255, 0.878);
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 1200ms ease;
+}
+.btn-one:hover ,  .btn-two:hover{
+    background: linear-gradient(to right ,hsl(4, 100%, 67%) , rgb(255, 176, 29) ) ;
+}
+.attribution{
+    margin-top: 30px;
+}
+
+.success-page{
+    width: 380px;
+    background-color: white;
+    border-radius: 35px;
+    padding: 1.8rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.429);
+}
+.icon{
+    width: 100%;
+}
+.icon img{
+    width: 50px;
+    height: 50px;
+}
+.text h1{
+    font-weight: 800;
+    margin-block: 25px;
+    font-size: 2.7rem;
+    color:var(--Blue2)
+
+}
+.text p {
+    margin-block: 25px;
+    font-family: 500;
+    width: 80%;
+}
+
+.btn-two{
+    width: 100%;
+    height: 55px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--Blue1);
+    color: rgba(255, 255, 255, 0.878);
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 1200ms ease;
+    margin-bottom: 15px;
+}
+
+.email{
+    font-weight: 900;
+}
+
+.hidden{
+    display: none;
+}
+.email-user{
+    font-weight: 800;
+}
+
+small.erorr {
+    display: none;
+    color: #ff4769ff;
+    font-size: 12px;
+}
+
+small.erorr.show {
+    display: block;
+}
