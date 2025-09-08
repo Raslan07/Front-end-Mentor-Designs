@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snap | Remote Work Solutions</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-left">
+        <img src="images/logo.svg" alt="Snap Logo" class="logo">
+        <nav class="desktop-nav">
+          <ul>
+            <li class="dropdown">
+              <button>
+                Features
+                <svg class="ml-2 w-4 h-4" width="10" height="6" xmlns="http://www.w3.org/2000/svg"
+                  style="margin-left: 8px;">
+                  <path stroke="#686868" stroke-width="1.5" fill="none" d="m1 1 4 4 4-4" />
+                </svg>
+              </button>
+              <div class="dropdown-content features-dropdown">
+                <a href="#">
+                  <svg width="14" height="16" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M11.333 0c.737 0 1.333.6 1.333 1.333v13.334c0 .737-.6 1.333-1.333 1.333H2.667C1.93 16 1.333 15.4 1.333 14.667V1.333C1.333.6 1.93 0 2.667 0h8.666ZM2.667 2.667v10.666h8.666V2.667H2.667Z"
+                      fill="#726CEE" />
+                  </svg>
+                  <span>Todo List</span>
+                </a>
+                <a href="#">
+                  <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M14 1.333H2C1.263 1.333.667 1.93.667 2.667v10.666c0 .737.596 1.334 1.333 1.334h12c.737 0 1.333-.597 1.333-1.334V2.667c0-.737-.596-1.334-1.333-1.334ZM2 13.333V4h12v9.333H2Z"
+                      fill="#4BB1DA" />
+                  </svg>
+                  <span>Calendar</span>
+                </a>
+                <a href="#">
+                  <svg width="12" height="16" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10 16a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM2 16a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm8-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM2 4a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"
+                      fill="#EDD556" />
+                  </svg>
+                  <span>Reminders</span>
+                </a>
+                <a href="#">
+                  <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm0 2.667a5.333 5.333 0 1 0 0 10.666A5.333 5.333 0 0 0 8 2.667Z"
+                      fill="#8E4CB6" />
+                  </svg>
+                  <span>Planning</span>
+                </a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <button>
+                Company
+                <svg class="ml-2 w-4 h-4" width="10" height="6" xmlns="http://www.w3.org/2000/svg"
+                  style="margin-left: 8px;">
+                  <path stroke="#686868" stroke-width="1.5" fill="none" d="m1 1 4 4 4-4" />
+                </svg>
+              </button>
+              <div class="dropdown-content company-dropdown">
+                <a href="#">History</a>
+                <a href="#">Our Team</a>
+                <a href="#">Blog</a>
+              </div>
+            </li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="desktop-auth">
+        <a href="#">Login</a>
+        <a href="#" class="register-btn">Register</a>
+      </div>
+
+      <button title="re" id="menu-btn">
+        <svg id="menu-open-icon" width="32" height="18" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#151515" fill-rule="evenodd">
+            <path d="M0 0h32v2H0zM0 8h32v2H0zM0 16h32v2H0z" />
+          </g>
+        </svg>
+        <svg id="menu-close-icon" class="hidden" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+          <path d="m2.393.948 22.628 22.628-1.414 1.414L.979 2.362 2.393.948Z" fill="#151515" fill-rule="evenodd" />
+          <path d="M.979 23.576 23.607.948l1.414 1.414L2.393 24.99.979 23.576Z" fill="#151515" fill-rule="evenodd" />
+        </svg>
+      </button>
+    </header>
+
+    <div id="mobile-menu" class="hidden">
+      <div class="mobile-nav-content">
+        <nav class="mobile-nav-links">
+          <div>
+            <button class="mobile-dropdown-btn">Features
+              <svg class="ml-2 w-4 h-4" width="10" height="6" xmlns="http://www.w3.org/2000/svg"
+                style="margin-left: 8px;">
+                <path stroke="#686868" stroke-width="1.5" fill="none" d="m1 1 4 4 4-4" />
+              </svg>
+            </button>
+            <div class="mobile-dropdown-content hidden">
+              <a href="#"><span>Todo List</span></a>
+              <a href="#"><span>Calendar</span></a>
+              <a href="#"><span>Reminders</span></a>
+              <a href="#"><span>Planning</span></a>
+            </div>
+          </div>
+          <div>
+            <button class="mobile-dropdown-btn">Company
+              <svg class="ml-2 w-4 h-4" width="10" height="6" xmlns="http://www.w3.org/2000/svg"
+                style="margin-left: 8px;">
+                <path stroke="#686868" stroke-width="1.5" fill="none" d="m1 1 4 4 4-4" />
+              </svg>
+            </button>
+            <div class="mobile-dropdown-content hidden">
+              <a href="#">History</a>
+              <a href="#">Our Team</a>
+              <a href="#">Blog</a>
+            </div>
+          </div>
+          <a href="#">Careers</a>
+          <a href="#">About</a>
+        </nav>
+        <div class="mobile-auth-links">
+          <a href="#">Login</a>
+          <a href="#" class="register-btn">Register</a>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <div class="hero-section">
+        <div class="hero-text-wrapper">
+          <h1>Make<br> remote work</h1>
+          <p>
+            Get your team in sync, no matter your location. Streamline processes,
+            create team rituals, and watch productivity soar.
+          </p>
+          <a href="#" class="learn-more-btn">Learn more</a>
+          <div class="client-logos">
+            <img src="images/client-databiz.svg" alt="Databiz">
+            <img src="images/client-audiophile.svg" alt="Audiophile">
+            <img src="images/client-meet.svg" alt="Meet">
+            <img src="images/client-maker.svg" alt="Maker">
+          </div>
+        </div>
+        <div class="hero-image-wrapper">
+          <picture>
+            <img src="images/image-hero-desktop.png" style="width: 500px; height: 100%;" alt="">
+          </picture>
+        </div>
+      </div>
+    </main>
+  </div>
+<script src="script.js"></script>
+</body>
+
+</html>
