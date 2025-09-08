@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap');
+
+/* Define CSS custom properties (variables) in :root for global scope */
+:root {
+    --neon-green: hsl(150, 100%, 66%);
+    --light-cyan: hsl(193, 38%, 86%);
+    --dark-grayish-blue: hsl(217, 19%, 24%);
+    --dark-blue: hsl(218, 23%, 16%);
+    --font-primary: "Manrope", sans-serif;
+}
+
+/* A modern CSS reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100dvh;
+    background-color: var(--dark-blue);
+    font-family: var(--font-primary);
+    text-align: center;
+
+  /* Use CSS Grid for simple and powerful centering */
+    display: grid;
+    place-content: center;
+    gap: 2rem; /* Adds space between card and footer */
+    padding: 1rem;
+}
+
+/* BEM (Block__Element--Modifier) Naming Convention for clarity */
+.advice-card {
+    background-color: var(--dark-grayish-blue);
+    padding: 2.5rem 2.5rem 4rem; /* Extra bottom padding for button overlap */
+    border-radius: 1rem;
+    max-width: 540px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    position: relative; 
+}
+
+.advice-card__title {
+    color: var(--neon-green);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.advice-card__quote {
+    color: var(--light-cyan);
+    font-size: clamp(1.5rem, 4vw, 1.75rem); /* Responsive font size */
+    font-weight: 800;
+    min-height: 120px; /* Prevents card resizing on text change */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.advice-card__divider {
+    margin: 1.5rem 0;
+    width: 100%;
+}
+
+.advice-card__button {
+    width: 64px;
+    height: 64px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: var(--neon-green);
+    display: grid;
+    place-content: center;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 50%);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.advice-card__button:hover {
+    box-shadow: 0 0 30px var(--neon-green);
+}
+
+/* Style for when the button is disabled via JavaScript */
+.advice-card__button:disabled {
+    cursor: wait;
+    opacity: 0.6;
+}
+
+.attribution {
+    font-size: 0.75rem;
+    color: var(--light-cyan);
+}
+
+.attribution a {
+    color: var(--neon-green);
+    text-decoration: none;
+}

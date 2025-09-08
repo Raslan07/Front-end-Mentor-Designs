@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | Advice generator app</title>
+</head>
+
+<body>
+
+  <!-- Use <main> for the primary content of the page for better semantics -->
+  <main class="advice-card">
+    <h1 class="advice-card__title">Advice #<span class="advice-card__id">0</span></h1>
+
+    <!-- Use <blockquote> for quotations -->
+    <figure>
+      <blockquote class="advice-card__quote">
+        Click the dice to get your first advice!
+      </blockquote>
+    </figure>
+
+    <!-- The <picture> element allows for responsive images -->
+    <picture>
+      <source media="(max-width: 500px)" srcset="images/pattern-divider-mobile.svg">
+      <img class="advice-card__divider" src="images/pattern-divider-desktop.svg" alt="" aria-hidden="true">
+    </picture>
+
+    <!-- Add an aria-label for accessibility -->
+    <button class="advice-card__button" aria-label="Generate new advice">
+      <img src="images/icon-dice.svg" alt="" aria-hidden="true">
+    </button>
+  </main>
+
+  <footer class="attribution">
+    Challenge by <a rel="noopener" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend
+      Mentor</a>.
+    Coded by <a href="#">Raslan</a>.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
