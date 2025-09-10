@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://placehold.co/32x32/png?text=TC">
+  <title>Tip Calculator App | Enhanced</title>
+</head>
+<body>
+  <h1 class="logo">SPLI<br>TTER</h1>
+  <form class="tip-calculator" id="tip-calculator-form">
+    <!-- Left Side: Inputs -->
+    <div class="calculator-inputs">
+
+      <div class="input-group">
+        <label for="bill" class="input-group__label">Bill</label>
+        <div class="input-container">
+          <svg xmlns="http://www.w3.org/2000/svg" class="input-container__icon" viewBox="0 0 12 18" fill="none">
+            <path
+              d="M11.5315 17.3516H7.33075V15.9781C8.2119 15.8693 8.95663 15.6517 9.56493 15.3253C10.1732 14.9989 10.6351 14.549 10.9506 13.9756C11.2661 13.4022 11.4238 12.6924 11.4238 11.8462V11.4238C11.4238 10.5959 11.2418 9.8915 10.8778 9.3106C10.5137 8.72971 9.99343 8.29524 9.31693 8.00719C8.64043 7.71914 7.8275 7.57512 6.87814 7.57512H5.03906V0.015625H7.13672V2.85938H7.40234C8.9082 2.85938 10.0527 3.20898 10.8359 3.9082C11.6191 4.60742 12 5.56445 12 6.7793V7.27344C12 7.87305 11.8945 8.4375 11.6836 8.9668C11.4727 9.49609 11.1719 9.96094 10.7812 10.3613C11.5315 10.7109 12.1152 11.2227 12.5322 11.8965C12.9492 12.5703 13.1582 13.3887 13.1582 14.3516V14.774C13.1582 15.9395 12.8086 16.8555 12.1094 17.5215C11.4102 18.1875 10.3809 18.5781 9.02148 18.6914V20.0156H4.13867V18.6914C2.76017 18.5781 1.67137 18.1875 0.871633 17.5215C0.0718917 16.8555 -0.227539 15.9395 -0.227539 14.774V14.3516C-0.227539 13.3887 -0.0185547 12.5703 0.398438 11.8965C0.81543 11.2227 1.39941 10.7109 2.14941 10.3613C1.51367 9.87305 1.06641 9.22266 0.808594 8.41016C0.550781 7.59766 0.421875 6.69531 0.421875 5.70312V5.2793C0.421875 4.06445 0.771484 3.10742 1.4707 2.4082C2.16992 1.70898 3.2207 1.35938 4.62891 1.35938H5.03906V4.20312H4.77344C3.89219 4.20312 3.25635 4.3418 2.86572 4.61914C2.4751 4.89648 2.27979 5.28711 2.27979 5.79102V6.21387C2.27979 7.0418 2.46191 7.74629 2.82598 8.32715C3.19004 8.90801 3.70039 9.34248 4.35645 9.63047C5.0125 9.91846 5.80488 10.0625 6.73359 10.0625H8.57266V17.3516H11.5315Z"
+              fill="#9EBBBD" />
+          </svg>
+          <input class="input-field" type="number" min="0" id="bill" placeholder="0.00">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="custom-tip" class="input-group__label">Select Tip %</label>
+        <div class="tip-selection-grid">
+          <button type="button" class="tip-button" data-tip="5">5%</button>
+          <button type="button" class="tip-button" data-tip="10">10%</button>
+          <button type="button" class="tip-button" data-tip="15">15%</button>
+          <button type="button" class="tip-button" data-tip="25">25%</button>
+          <button type="button" class="tip-button" data-tip="50">50%</button>
+          <input type="number" min="0" max="100" id="custom-tip" class="custom-tip-input" placeholder="Custom">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="people" class="input-group__label">
+          Number of People
+          <span class="error-msg" id="people-error">Can't be zero</span>
+        </label>
+        <div class="input-container">
+          <svg xmlns="http://www.w3.org/2000/svg" class="input-container__icon" viewBox="0 0 14 16" fill="none">
+            <path
+              d="M11.6667 12.3333C12.9553 12.3333 14 13.378 14 14.6667C14 15.403 13.403 16 12.6667 16H1.33333C0.597 16 0 15.403 0 14.6667C0 13.378 1.04467 12.3333 2.33333 12.3333H11.6667ZM7 12C9.20914 12 11 10.2091 11 8C11 5.79086 9.20914 4 7 4C4.79086 4 3 5.79086 3 8C3 10.2091 4.79086 12 7 12ZM7 10C5.89543 10 5 9.10457 5 8C5 6.89543 5.89543 6 7 6C8.10457 6 9 6.89543 9 8C9 9.10457 8.10457 10 7 10ZM11.6667 2.33333C12.9553 2.33333 14 1.28867 14 0C13.403 0 12.6667 0.597 12.6667 1.33333C12.6667 0.597 12.403 0 11.6667 0C10.378 0 9.33333 1.04467 9.33333 2.33333C9.33333 3.622 10.378 4.66667 11.6667 4.66667C12.9553 4.66667 14 3.622 14 2.33333H11.6667V2.33333ZM2.33333 2.33333C1.04467 2.33333 0 1.28867 0 0C0.597 0 1.33333 0.597 1.33333 1.33333C1.33333 0.597 1.597 0 2.33333 0C3.622 0 4.66667 1.04467 4.66667 2.33333C4.66667 3.622 3.622 4.66667 2.33333 4.66667C1.04467 4.66667 0 3.622 0 2.33333H2.33333V2.33333Z"
+              fill="#9EBBBD" />
+          </svg>
+          <input class="input-field" type="number" min="0" id="people" placeholder="0">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Side: Results -->
+    <div class="calculator-results">
+      <div>
+        <div class="result-row">
+          <div class="result-label">
+            <p class="result-label__title">Tip Amount</p>
+            <p class="result-label__per-person">/ person</p>
+          </div>
+          <p class="result-amount" id="tip-amount">$0.00</p>
+        </div>
+
+        <div class="result-row">
+          <div class="result-label">
+            <p class="result-label__title">Total</p>
+            <p class="result-label__per-person">/ person</p>
+          </div>
+          <p class="result-amount" id="total-per-person">$0.00</p>
+        </div>
+      </div>
+
+      <button type="reset" class="reset-button" id="reset-btn" disabled>Reset</button>
+    </div>
+  </form>
+
+  <div class="attribution">
+    Challenge by <a rel="noopener" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend
+      Mentor</a>.
+    Coded by <a href="#">Raslan</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
