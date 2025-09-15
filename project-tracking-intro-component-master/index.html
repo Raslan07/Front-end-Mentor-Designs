@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/FrontendMasters/project-tracking-intro-component/main/images/favicon-32x32.png">
+  <title>Project Tracking Intro Component</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Barlow:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  
+  <div class="container">
+    <div class="background-shape"></div>
+    <div class="overlay"></div>
+    <header class="header">
+      <a href="#" class="header__logo" aria-label="Home">
+        <img src="images/logo.svg" alt="">
+      </a>
+      
+      <button class="header__menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg class="icon-hamburger" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="#242942" d="M24 6H0V2h24v4zm0 4H0v4h24v-4zm0 8H0v4h24v-4z"/></svg>
+        <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path fill="#242942" fill-rule="evenodd" d="M17.778.808l1.414 1.414L11.414 10l7.778 7.778-1.414 1.414L10 11.414l-7.778 7.778-1.414-1.414L8.586 10 .808 2.222 2.222.808 10 8.586 17.778.808z"/></svg>
+      </button>
+
+      <nav class="header__nav">
+        <ul class="header__nav-list">
+          <li><a href="#">Product</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li class="login-item"><a href="#">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <div class="hero__image-container">
+        <img src="images/illustration-devices.svg" alt="Monograph dashboard shown on a laptop and mobile screen">
+      </div>
+      
+      <div class="hero__content">
+        <p class="hero__pre-title">
+          <span class="badge">New</span>
+          Monograph Dashboard
+        </p>
+        <h1 class="hero__title">Powerful insights into your team</h1>
+        <p class="hero__description">Project planning and time tracking for agile teams</p>
+        <div class="hero__cta">
+          <button type="button">Schedule a demo</button>
+          <span>To see a preview</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const menuToggle = document.querySelector('.header__menu-toggle');
+    const body = document.querySelector('body');
+
+    menuToggle.addEventListener('click', () => {
+      body.classList.toggle('nav-open');
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !isExpanded);
+    });
+  </script>
+</body>
+</html>
