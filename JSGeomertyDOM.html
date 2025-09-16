@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Geometry Properties Visualizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .demo-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .demo-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .visual-demo {
+            position: relative;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .properties-panel {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .property {
+            margin: 8px 0;
+            padding: 5px 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .property-name {
+            font-weight: bold;
+            color: #764ba2;
+        }
+        
+        .property-value {
+            color: #333;
+            margin-left: 10px;
+        }
+        
+        /* Client Properties Demo */
+        .client-demo {
+            width: 300px;
+            height: 200px;
+            padding: 20px;
+            border: 15px solid #ff6b6b;
+            background: #4ecdc4;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-area {
+            background: rgba(255, 255, 255, 0.8);
+            height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Offset Properties Demo */
+        .offset-container {
+            position: relative;
+            width: 400px;
+            height: 250px;
+            background: #f0f0f0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+        
+        .offset-parent {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            width: 200px;
+            height: 150px;
+            background: #ff9ff3;
+            border-radius: 8px;
+            border: 5px solid #f368e0;
+        }
+        
+        .offset-child {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            width: 80px;
+            height: 60px;
+            background: #74b9ff;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        /* Scroll Properties Demo */
+        .scroll-container {
+            width: 300px;
+            height: 200px;
+            overflow: auto;
+            border: 3px solid #fd79a8;
+            border-radius: 10px;
+            background: white;
+        }
+        
+        .scroll-content {
+            width: 500px;
+            height: 400px;
+            background: linear-gradient(45deg, #fdcb6e, #e17055);
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .scroll-controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        /* Canvas Demo */
+        .canvas-container {
+            text-align: center;
+        }
+        
+        #geometryCanvas {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            cursor: crosshair;
+        }
+        
+        .canvas-info {
+            margin-top: 15px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .explanation {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+        
+        .measurement-formula {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .demo-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 JavaScript Geometry Properties Visualizer</h1>
+        
+        <!-- Client Properties Section -->
+        <div class="demo-section">
+            <h2 class="section-title">📐 Client Properties (clientLeft, clientTop, clientWidth, clientHeight)</h2>
+            <div class="demo-container">
+                <div class="visual-demo">
+                    <div class="client-demo" id="clientDemo">
+                        <div class="content-area">Content Area</div>
+                    </div>
+                    <div class="explanation">
+                        <h4>How Client Properties Work:</h4>
+                        <ul>
+                            <li><strong>clientLeft/clientTop:</strong> Width of left/top border</li>
+                            <li><strong>clientWidth/clientHeight:</strong> Content area size (excluding borders & scrollbars)</li>
+                        </ul>
+                        <div class="measurement-formula">
+                            clientWidth = element.width - leftBorder - rightBorder - scrollbarWidth<br>
+                            clientHeight = element.height - topBorder - bottomBorder - scrollbarHeight
+                        </div>
+                    </div>
+                </div>
+                <div class="properties-panel" id="clientProperties"></div>
+            </div>
+        </div>
+        
+        <!-- Offset Properties Section -->
+        <div class="demo-section">
+            <h2 class="section-title">📏 Offset Properties (offsetWidth, offsetHeight, offsetParent, offsetLeft, offsetTop)</h2>
+            <div class="demo-container">
+                <div class="visual-demo">
+                    <div class="offset-container">
+                        <div class="offset-parent" id="offsetParent">
+                            <div class="offset-child" id="offsetChild">Child</div>
+                        </div>
+                    </div>
+                    <div class="explanation">
+                        <h4>How Offset Properties Work:</h4>
+                        <ul>
+                            <li><strong>offsetWidth/offsetHeight:</strong> Total element size including borders, padding, content</li>
+                            <li><strong>offsetLeft/offsetTop:</strong> Distance from offsetParent's padding edge</li>
+                            <li><strong>offsetParent:</strong> Nearest positioned ancestor or body</li>
+                        </ul>
+                        <div class="measurement-formula">
+                            offsetWidth = content + padding + border<br>
+                            offsetLeft = distance from offsetParent's left padding edge
+                        </div>
+                    </div>
+                </div>
+                <div class="properties-panel" id="offsetProperties"></div>
+            </div>
+        </div>
+        
+        <!-- Scroll Properties Section -->
+        <div class="demo-section">
+            <h2 class="section-title">🔄 Scroll Properties (scrollWidth, scrollHeight, scrollLeft, scrollTop)</h2>
+            <div class="demo-container">
+                <div class="visual-demo">
+                    <div class="scroll-container" id="scrollContainer">
+                        <div class="scroll-content">
+                            <h3>Scrollable Content</h3>
+                            <p>This content is larger than the container, so it creates scrollbars.</p>
+                            <p>Scroll around and watch the properties update!</p>
+                            <p>The scrollWidth and scrollHeight represent the total content size.</p>
+                            <p>The scrollLeft and scrollTop show current scroll position.</p>
+                        </div>
+                    </div>
+                    <div class="scroll-controls">
+                        <button class="btn" onclick="scrollToPosition(0, 0)">Top Left</button>
+                        <button class="btn" onclick="scrollToPosition(100, 50)">Scroll 100,50</button>
+                        <button class="btn" onclick="scrollToBottom()">Bottom Right</button>
+                    </div>
+                    <div class="explanation">
+                        <h4>How Scroll Properties Work:</h4>
+                        <ul>
+                            <li><strong>scrollWidth/scrollHeight:</strong> Total content size including hidden overflow</li>
+                            <li><strong>scrollLeft/scrollTop:</strong> Current scroll offset from top-left corner</li>
+                        </ul>
+                        <div class="measurement-formula">
+                            scrollWidth = total content width (visible + hidden)<br>
+                            scrollLeft = pixels scrolled horizontally from left edge
+                        </div>
+                    </div>
+                </div>
+                <div class="properties-panel" id="scrollProperties"></div>
+            </div>
+        </div>
+        
+        <!-- Canvas Interactive Demo -->
+        <div class="demo-section">
+            <h2 class="section-title">🎨 Interactive Canvas Demo - Mouse Position & Element Geometry</h2>
+            <div class="canvas-container">
+                <canvas id="geometryCanvas" width="600" height="300"></canvas>
+                <div class="canvas-info" id="canvasInfo">
+                    Move your mouse over the canvas to see coordinates and geometry calculations
+                </div>
+                <div class="explanation">
+                    <h4>Canvas Geometry Calculations:</h4>
+                    <p>This demo shows how different coordinate systems work together:</p>
+                    <ul>
+                        <li><strong>Page Coordinates:</strong> Relative to entire document</li>
+                        <li><strong>Client Coordinates:</strong> Relative to viewport</li>
+                        <li><strong>Canvas Coordinates:</strong> Relative to canvas element</li>
+                        <li><strong>Element Bounds:</strong> getBoundingClientRect() values</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables for demo elements
+        let clientDemo, offsetParent, offsetChild, scrollContainer, canvas, ctx;
+        
+        // Initialize all demos
+        function initializeDemos() {
+            clientDemo = document.getElementById('clientDemo');
+            offsetParent = document.getElementById('offsetParent');
+            offsetChild = document.getElementById('offsetChild');
+            scrollContainer = document.getElementById('scrollContainer');
+            canvas = document.getElementById('geometryCanvas');
+            ctx = canvas.getContext('2d');
+            
+            // Start updating properties
+            updateAllProperties();
+            
+            // Add scroll event listener
+            scrollContainer.addEventListener('scroll', updateScrollProperties);
+            
+            // Add canvas mouse tracking
+            setupCanvasDemo();
+            
+            // Update properties periodically
+            setInterval(updateAllProperties, 100);
+        }
+        
+        // Update client properties
+        function updateClientProperties() {
+            const panel = document.getElementById('clientProperties');
+            const style = getComputedStyle(clientDemo);
+            
+            panel.innerHTML = `
+                <h4>Client Properties:</h4>
+                <div class="property">
+                    <span class="property-name">clientLeft:</span>
+                    <span class="property-value">${clientDemo.clientLeft}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">clientTop:</span>
+                    <span class="property-value">${clientDemo.clientTop}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">clientWidth:</span>
+                    <span class="property-value">${clientDemo.clientWidth}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">clientHeight:</span>
+                    <span class="property-value">${clientDemo.clientHeight}px</span>
+                </div>
+                <hr>
+                <h4>Calculation Details:</h4>
+                <div class="property">
+                    Border Left: ${style.borderLeftWidth}
+                </div>
+                <div class="property">
+                    Border Top: ${style.borderTopWidth}
+                </div>
+                <div class="property">
+                    Padding: ${style.padding}
+                </div>
+                <div class="property">
+                    Content Width: ${clientDemo.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight)}px
+                </div>
+            `;
+        }
+        
+        // Update offset properties
+        function updateOffsetProperties() {
+            const panel = document.getElementById('offsetProperties');
+            const childStyle = getComputedStyle(offsetChild);
+            
+            panel.innerHTML = `
+                <h4>Offset Child Properties:</h4>
+                <div class="property">
+                    <span class="property-name">offsetWidth:</span>
+                    <span class="property-value">${offsetChild.offsetWidth}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">offsetHeight:</span>
+                    <span class="property-value">${offsetChild.offsetHeight}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">offsetLeft:</span>
+                    <span class="property-value">${offsetChild.offsetLeft}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">offsetTop:</span>
+                    <span class="property-value">${offsetChild.offsetTop}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">offsetParent:</span>
+                    <span class="property-value">${offsetChild.offsetParent.className}</span>
+                </div>
+                <hr>
+                <h4>Calculation Details:</h4>
+                <div class="property">
+                    Width: content(${offsetChild.clientWidth}px) + borders
+                </div>
+                <div class="property">
+                    Position: relative to offsetParent's padding edge
+                </div>
+            `;
+        }
+        
+        // Update scroll properties
+        function updateScrollProperties() {
+            const panel = document.getElementById('scrollProperties');
+            
+            panel.innerHTML = `
+                <h4>Scroll Properties:</h4>
+                <div class="property">
+                    <span class="property-name">scrollWidth:</span>
+                    <span class="property-value">${scrollContainer.scrollWidth}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">scrollHeight:</span>
+                    <span class="property-value">${scrollContainer.scrollHeight}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">scrollLeft:</span>
+                    <span class="property-value">${scrollContainer.scrollLeft}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">scrollTop:</span>
+                    <span class="property-value">${scrollContainer.scrollTop}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">clientWidth:</span>
+                    <span class="property-value">${scrollContainer.clientWidth}px</span>
+                </div>
+                <div class="property">
+                    <span class="property-name">clientHeight:</span>
+                    <span class="property-value">${scrollContainer.clientHeight}px</span>
+                </div>
+                <hr>
+                <h4>Scroll Progress:</h4>
+                <div class="property">
+                    Horizontal: ${Math.round((scrollContainer.scrollLeft / (scrollContainer.scrollWidth - scrollContainer.clientWidth)) * 100)}%
+                </div>
+                <div class="property">
+                    Vertical: ${Math.round((scrollContainer.scrollTop / (scrollContainer.scrollHeight - scrollContainer.clientHeight)) * 100)}%
+                </div>
+            `;
+        }
+        
+        // Setup canvas demo with mouse tracking
+        function setupCanvasDemo() {
+            canvas.addEventListener('mousemove', handleCanvasMouseMove);
+            canvas.addEventListener('mouseleave', () => {
+                document.getElementById('canvasInfo').textContent = 'Move your mouse over the canvas to see coordinates';
+                drawCanvas();
+            });
+            
+            drawCanvas();
+        }
+        
+        function handleCanvasMouseMove(event) {
+            const rect = canvas.getBoundingClientRect();
+            const canvasX = event.clientX - rect.left;
+            const canvasY = event.clientY - rect.top;
+            
+            const info = document.getElementById('canvasInfo');
+            info.innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                    <div>
+                        <strong>Mouse Coordinates:</strong><br>
+                        Page: (${event.pageX}, ${event.pageY})<br>
+                        Client: (${event.clientX}, ${event.clientY})<br>
+                        Canvas: (${Math.round(canvasX)}, ${Math.round(canvasY)})
+                    </div>
+                    <div>
+                        <strong>Canvas Geometry:</strong><br>
+                        Bounds: ${Math.round(rect.left)}, ${Math.round(rect.top)}, ${Math.round(rect.width)}, ${Math.round(rect.height)}<br>
+                        Offset: (${canvas.offsetLeft}, ${canvas.offsetTop})<br>
+                        Client: (${canvas.clientWidth}, ${canvas.clientHeight})
+                    </div>
+                </div>
+            `;
+            
+            drawCanvas(canvasX, canvasY, event.clientX, event.clientY);
+        }
+        
+        function drawCanvas(mouseX, mouseY, clientX, clientY) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw grid
+            ctx.strokeStyle = '#f0f0f0';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < canvas.width; x += 50) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += 50) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+            
+            // Draw coordinate labels
+            ctx.fillStyle = '#666';
+            ctx.font = '12px monospace';
+            for (let x = 50; x < canvas.width; x += 50) {
+                ctx.fillText(x.toString(), x - 8, 15);
+            }
+            for (let y = 50; y < canvas.height; y += 50) {
+                ctx.fillText(y.toString(), 5, y + 4);
+            }
+            
+            if (mouseX !== undefined && mouseY !== undefined) {
+                // Draw crosshair at mouse position
+                ctx.strokeStyle = '#667eea';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(mouseX, 0);
+                ctx.lineTo(mouseX, canvas.height);
+                ctx.moveTo(0, mouseY);
+                ctx.lineTo(canvas.width, mouseY);
+                ctx.stroke();
+                
+                // Draw mouse position circle
+                ctx.fillStyle = '#ff6b6b';
+                ctx.beginPath();
+                ctx.arc(mouseX, mouseY, 5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw coordinates text
+                ctx.fillStyle = '#333';
+                ctx.font = 'bold 14px sans-serif';
+                ctx.fillText(`(${Math.round(mouseX)}, ${Math.round(mouseY)})`, mouseX + 10, mouseY - 10);
+            }
+        }
+        
+        // Scroll control functions
+        function scrollToPosition(left, top) {
+            scrollContainer.scrollLeft = left;
+            scrollContainer.scrollTop = top;
+        }
+        
+        function scrollToBottom() {
+            scrollContainer.scrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+            scrollContainer.scrollTop = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+        }
+        
+        // Update all properties
+        function updateAllProperties() {
+            updateClientProperties();
+            updateOffsetProperties();
+            updateScrollProperties();
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeDemos);
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Browser extensions manager UI</title>
+</head>
+<body>
+  <div class="container">
+    <!-- Header search bar with btn changer of theme -->
+    <header class="search-bar">
+      <div class="extension-icon">
+        <img src="assets/images/logo.svg" alt="#">
+      </div>
+      <div class="btn-theme">
+        <button title="theme-toggle" type="button" id="toggle-theme">
+          <img src="assets/images/icon-sun.svg" alt="">
+        </button>
+      </div>
+    </header>
+    <nav class="list-btns">
+      <div class="list-extenstion">
+        <h1>Extensions List</h1>
+      </div>
+      <div class="active">
+        <button type="submit" class="btn" id="all">All</button>
+        <button type="submit" class="btn" id="active">Active</button>
+        <button type="submit" class="btn" id="inactive">Inactive</button>
+      </div>
+    </nav>
+    <main class="extension" id="field-container">
+        <section  class="field-exten">
+          <div class="header-dis">
+            <div class="icon">
+              <img class="todo" src="" alt="">
+            </div>
+            <div class="name">
+              <h1 id="title"></h1>
+              <p id="para"></p>
+            </div>
+          </div>
+          <div class="buttons">
+            <button id="remove" type="button">Remove</button>
+            <label class="switch">
+              <input class="inputs" title="t" type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </section>
+        
+    </main>
+  </div>
+
+
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Coded by <a rel="noopener" href="#">Raslan</a>.
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
