@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <title>Enhanced | Browser Extensions Manager</title>
+
+  <style>
+    /* ------------------- */
+    /* --- CSS RESET --- */
+    /* ------------------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      color-scheme: dark light;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Noto Sans", sans-serif;
+      line-height: 1.5;
+      background-color: var(--color-background);
+      color: var(--color-text-primary);
+      display: grid;
+      place-content: center;
+      padding: 1rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    img, picture, svg, video {
+      display: block;
+      max-width: 100%;
+    }
+    
+    button {
+      font: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    /* ------------------- */
+    /* --- THEME & VARS -- */
+    /* ------------------- */
+    :root {
+      /* Light Theme */
+      --color-background-light: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+      --color-surface-light: hsl(0, 0%, 100%);
+      --color-text-primary-light: hsl(227, 75%, 14%);
+      --color-text-secondary-light: hsl(226, 11%, 37%);
+      --color-accent-light: hsl(3, 71%, 56%);
+      --color-button-secondary-bg-light: hsl(217, 61%, 90%);
+      --color-button-secondary-text-light: hsl(226, 11%, 37%);
+      --card-border-light: transparent;
+
+      /* Dark Theme */
+      --color-background-dark: linear-gradient(180deg, #040918 0%, #091540 100%);
+      --color-surface-dark: hsl(226, 25%, 17%);
+      --color-text-primary-dark: hsl(0, 0%, 93%);
+      --color-text-secondary-dark: hsl(0, 0%, 78%);
+      --color-accent-dark: hsl(3, 71%, 56%);
+      --color-button-secondary-bg-dark: hsl(225, 23%, 24%);
+      --color-button-secondary-text-dark: hsl(0, 0%, 93%);
+      --card-border-dark: hsl(225, 23%, 24%);
+    }
+
+    html[data-theme='light'] {
+      --color-background: var(--color-background-light);
+      --color-surface: var(--color-surface-light);
+      --color-text-primary: var(--color-text-primary-light);
+      --color-text-secondary: var(--color-text-secondary-light);
+      --color-accent: var(--color-accent-light);
+      --color-button-secondary-bg: var(--color-button-secondary-bg-light);
+      --color-button-secondary-text: var(--color-button-secondary-text-light);
+      --card-border: var(--card-border-light);
+    }
+    
+    html[data-theme='dark'] {
+      --color-background: var(--color-background-dark);
+      --color-surface: var(--color-surface-dark);
+      --color-text-primary: var(--color-text-primary-dark);
+      --color-text-secondary: var(--color-text-secondary-dark);
+      --color-accent: var(--color-accent-dark);
+      --color-button-secondary-bg: var(--color-button-secondary-bg-dark);
+      --color-button-secondary-text: var(--color-button-secondary-text-dark);
+      --card-border: var(--card-border-dark);
+    }
+
+    /* ------------------- */
+    /* --- LAYOUT & MAIN -- */
+    /* ------------------- */
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin-inline: auto;
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--color-surface);
+      padding: 0.5rem 1.5rem;
+      border-radius: 1.25rem;
+      margin-bottom: 4rem;
+    }
+
+    .theme-toggle {
+      width: 50px;
+      height: 50px;
+      border-radius: 1rem;
+      display: grid;
+      place-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+       background-color: var(--color-button-secondary-bg);
+    }
+
+    .theme-toggle img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .filters h1 {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    
+    .filter-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.5rem;
+      border-radius: 100vw;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      background-color: var(--color-button-secondary-bg);
+      color: var(--color-button-secondary-text);
+    }
+
+    .filter-btn:hover {
+      color: var(--color-accent);
+    }
+
+    .filter-btn.active {
+      background-color: var(--color-accent);
+      color: white;
+    }
+
+    /* ------------------- */
+    /* --- EXTENSIONS GRID - */
+    /* ------------------- */
+    .extensions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .extension-card {
+      background-color: var(--color-surface);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .extension-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+    
+    .card-icon-wrapper {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        /* Add background color for icons if needed */
+    }
+
+    .card-info h2 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+
+    .card-info p {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      margin-top: 0.5rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .remove-btn {
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.5rem 1.25rem;
+      border-radius: 100vw;
+      background-color: var(--color-button-secondary-bg);
+      color: var(--color-button-secondary-text);
+      transition: all 0.3s ease;
+    }
+
+    .remove-btn:hover {
+      background-color: var(--color-accent);
+      color: white;
+    }
+    
+    /* --- TOGGLE SWITCH --- */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 28px;
+    }
+
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--color-button-secondary-bg);
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--color-accent);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(22px);
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <!-- The user will add the icon path here -->
+        <img src="" alt="Site Logo">
+      </div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark and light theme">
+        <!-- The user will add the icon path here -->
+        <img id="theme-icon" src="" alt="Theme toggle icon">
+      </button>
+    </header>
+
+    <main>
+      <section class="filters" aria-labelledby="filters-heading">
+        <h1 id="filters-heading">Extensions List</h1>
+        <div class="filter-buttons" id="filter-buttons">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="active">Active</button>
+          <button class="filter-btn" data-filter="inactive">Inactive</button>
+        </div>
+      </section>
+
+      <div class="extensions-grid" id="extensions-grid">
+        <!-- Extension cards will be dynamically inserted here -->
+      </div>
+    </main>
+  </div>
+
+  <!-- This is the template for a single extension card -->
+  <template id="extension-card-template">
+    <div class="extension-card">
+      <div class="card-header">
+        <div class="card-icon-wrapper">
+            <!-- The user will add the icon path here -->
+            <img class="card-icon" src="" alt="">
+        </div>
+        <div class="card-info">
+          <h2 class="card-title"></h2>
+          <p class="card-description"></p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="remove-btn">Remove</button>
+        <label class="switch">
+          <input class="toggle-input" type="checkbox">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </template>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- ELEMENTS ---
+      const themeToggleButton = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const extensionsGrid = document.getElementById('extensions-grid');
+      const cardTemplate = document.getElementById('extension-card-template');
+      const filterButtonGroup = document.getElementById('filter-buttons');
+
+      // --- DATA ---
+      // In a real application, you would fetch this. For this example, it's embedded.
+      const extensionsData = [
+          { "logo": "", "name": "DevLens", "description": "Quickly inspect page layouts and visualize element boundaries.", "isActive": true },
+          { "logo": "", "name": "StyleSpy", "description": "Instantly analyze and copy CSS from any webpage element.", "isActive": true },
+          { "logo": "", "name": "SpeedBoost", "description": "Optimizes browser resource usage to accelerate page loading.", "isActive": false },
+          { "logo": "", "name": "JSONWizard", "description": "Formats, validates, and prettifies JSON responses in-browser.", "isActive": true },
+          { "logo": "", "name": "TabMaster Pro", "description": "Organizes browser tabs into groups and sessions.", "isActive": true },
+          { "logo": "", "name": "ViewportBuddy", "description": "Simulates various screen resolutions directly within the browser.", "isActive": false },
+          { "logo": "", "name": "Markup Notes", "description": "Enables annotation and notes directly onto webpages for collaborative debugging.", "isActive": true },
+          { "logo": "", "name": "GridGuides", "description": "Overlay customizable grids and alignment guides on any webpage.", "isActive": false },
+          { "logo": "", "name": "Palette Picker", "description": "Instantly extracts color palettes from any webpage.", "isActive": true },
+          { "logo": "", "name": "LinkChecker", "description": "Scans and highlights broken links on any page.", "isActive": true },
+          { "logo": "", "name": "DOM Snapshot", "description": "Capture and export DOM structures quickly.", "isActive": false },
+          { "logo": "", "name": "ConsolePlus", "description": "Enhanced developer console with advanced filtering and logging.", "isActive": true }
+      ];
+
+      let currentFilter = 'all';
+
+      // --- THEME TOGGLE ---
+      const sunIconPath = ""; // User should add path to sun icon
+      const moonIconPath = ""; // User should add path to moon icon
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        // NOTE: User must provide paths to their local sun/moon icons
+        // For example: themeIcon.src = theme === 'dark' ? './assets/icon-sun.svg' : './assets/icon-moon.svg';
+        themeIcon.src = theme === 'dark' ? sunIconPath : moonIconPath;
+      }
+      
+      // Initialize theme based on system preference or saved choice
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+      setTheme(currentTheme);
+
+      themeToggleButton.addEventListener('click', () => {
+        const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+
+
+      // --- RENDER FUNCTION ---
+      function renderExtensions(filter = 'all') {
+        extensionsGrid.innerHTML = ''; // Clear existing cards
+
+        const filteredData = extensionsData.filter(item => {
+          if (filter === 'all') return true;
+          if (filter === 'active') return item.isActive;
+          if (filter === 'inactive') return !item.isActive;
+        });
+
+        if (filteredData.length === 0) {
+            extensionsGrid.innerHTML = '<p>No extensions match the filter.</p>';
+            return;
+        }
+
+        filteredData.forEach(item => {
+          const cardClone = cardTemplate.content.cloneNode(true);
+          
+          cardClone.querySelector('.card-icon').src = item.logo;
+          // Set an alt attribute for accessibility.
+          cardClone.querySelector('.card-icon').alt = `${item.name} logo`;
+          cardClone.querySelector('.card-title').textContent = item.name;
+          cardClone.querySelector('.card-description').textContent = item.description;
+          cardClone.querySelector('.toggle-input').checked = item.isActive;
+
+          extensionsGrid.appendChild(cardClone);
+        });
+      }
+
+      // --- EVENT LISTENERS ---
+      filterButtonGroup.addEventListener('click', (e) => {
+        if (e.target.classList.contains('filter-btn')) {
+          // Update active button style
+          filterButtonGroup.querySelector('.active').classList.remove('active');
+          e.target.classList.add('active');
+
+          // Get new filter and render
+          currentFilter = e.target.dataset.filter;
+          renderExtensions(currentFilter);
+        }
+      });
+      
+      // Event delegation for remove buttons
+      extensionsGrid.addEventListener('click', (e) => {
+          if (e.target.classList.contains('remove-btn')) {
+              e.target.closest('.extension-card').remove();
+              // In a real app, you would also remove the item from the data array and state
+          }
+      });
+
+      // --- INITIAL RENDER ---
+      renderExtensions();
+    });
+  </script>
+</body>
+</html>

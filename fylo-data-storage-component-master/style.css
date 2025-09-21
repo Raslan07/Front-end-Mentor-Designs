@@ -1,0 +1,225 @@
+:root {
+      --gradient: linear-gradient(to right, hsl(6, 100%, 80%), hsl(335, 100%, 65%));
+      --pale-blue: hsl(243, 100%, 93%);
+      --grayish-blue: hsl(229, 7%, 55%);
+      --dark-blue: hsl(228, 56%, 26%);
+      --very-dark-blue: hsl(229, 57%, 11%);
+      --font-family: 'Raleway', sans-serif;
+    }
+
+    /* 2. Modern CSS Reset */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* 3. Base & Body Styling */
+    html {
+      font-size: 14px;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--pale-blue);
+      background-color: var(--very-dark-blue);
+      min-height: 100vh;
+
+      /* 5. Centering with Grid */
+      display: grid;
+      place-items: center;
+
+      /* Decorative background images */
+      background-image: url("images/bg-desktop.png");
+      background-repeat: no-repeat;
+      background-position: bottom center;
+      background-size: 100% 50vh;
+    }
+
+    /* 4. Semantic Main Container */
+    .storage-component {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-end;
+    }
+
+    /* Card Base Styles */
+    .card {
+      background-color: var(--dark-blue);
+      padding: 2.85rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+    }
+
+    /* Brand Card (Left) */
+    .brand-card {
+      border-top-right-radius: 7rem;
+    }
+
+    .brand-card .logo {
+      margin-bottom: 2rem;
+    }
+
+    .icon-group {
+      display: flex;
+      gap: 1.15rem;
+    }
+
+    .icon-group .icon-container {
+      background-color: var(--very-dark-blue);
+      width: 3.4rem;
+      height: 3.4rem;
+      display: grid;
+      place-items: center;
+      border-radius: 0.7rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .icon-group .icon-container:hover {
+      background-color: hsl(228, 56%, 40%);
+    }
+
+    /* Usage Card (Right) */
+    .usage-card {
+      flex-grow: 1;
+      width: 38.5rem;
+      position: relative;
+      /* For positioning the bubble */
+    }
+
+    .usage-card p {
+      font-size: 1rem;
+    }
+
+    .usage-card p strong {
+      font-weight: 700;
+      color: var(--pale-blue);
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      width: 100%;
+      height: 1.4rem;
+      background-color: hsla(229, 57%, 11%, 0.5);
+      border-radius: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 0.7rem;
+      padding: 0.2rem;
+    }
+
+    .progress-bar-inner {
+      height: 100%;
+      width: 81.5%;
+      /* Represents 815GB used */
+      background-image: var(--gradient);
+      border-radius: 1rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+    }
+
+    /* 7. Pseudo-element for progress handle */
+    .progress-bar-inner::after {
+      content: '';
+      width: 0.85rem;
+      height: 0.85rem;
+      background-color: white;
+      border-radius: 50%;
+      margin-right: 0.2rem;
+    }
+
+    .storage-labels {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+    }
+
+    /* "GB Left" Bubble */
+    .gb-left-bubble {
+      position: absolute;
+      top: -3.2rem;
+      right: 2.85rem;
+      background-color: white;
+      color: var(--very-dark-blue);
+      padding: 1rem 1.7rem;
+      border-radius: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .gb-left-bubble .value {
+      font-size: 2.85rem;
+      font-weight: 700;
+    }
+
+    .gb-left-bubble .label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--grayish-blue);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* 7. Pseudo-element for bubble triangle */
+    .gb-left-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -1.4rem;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-top: 1.5rem solid white;
+      border-left: 1.5rem solid transparent;
+    }
+
+
+    /* --- Responsive Design --- */
+    @media (max-width: 768px) {
+      body {
+        background-image: url("images/bg-mobile.png");
+        background-size: cover;
+      }
+
+      .storage-component {
+        flex-direction: column;
+        gap: 1.15rem;
+        align-items: center;
+        width: 90%;
+        max-width: 25rem;
+      }
+
+      .card {
+        width: 100%;
+      }
+
+      .brand-card {
+        padding: 2.5rem;
+      }
+
+      .usage-card {
+        width: 100%;
+        text-align: center;
+        padding-bottom: 3.5rem;
+      }
+
+      .gb-left-bubble {
+        left: 50%;
+        transform: translateX(-50%);
+        top: auto;
+        bottom: -2.5rem;
+        border-radius: 0.7rem;
+      }
+
+      /* Hide the desktop triangle and show a centered one */
+      .gb-left-bubble::after {
+        display: none;
+      }
+    }
+    figure{
+        display: flex;
+    }
