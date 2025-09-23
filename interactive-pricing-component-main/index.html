@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://placehold.co/32x32/ffffff/000000?text=IP">
+  <title>Frontend Mentor | Interactive pricing component</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+  <main>
+    <header class="intro">
+      <h1>Simple, traffic-based pricing</h1>
+      <p>Sign-up for our 30-day trial. No credit card required.</p>
+    </header>
+
+    <div class="pricing-card">
+      <div class="pricing-card__calculator">
+        <div class="calculator__row calculator__row--top">
+          <span id="pageviews-text" class="pageviews">100K PAGEVIEWS</span>
+          <div class="price">
+            <span id="price-amount" class="price__amount">$16.00</span>
+            <span class="price__period">/ month</span>
+          </div>
+        </div>
+
+        <div class="slider-container">
+          <!-- The slider's max value is 4, corresponding to the 5 tiers in our JS array (0-4) -->
+          <input type="range" id="price-slider" min="0" max="4" value="2" aria-label="Price slider">
+        </div>
+
+        <div class="calculator__row">
+          <div class="billing-cycle">
+            <span>Monthly Billing</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="billing-toggle" aria-label="Toggle yearly billing">
+              <span class="toggle-switch__slider"></span>
+            </label>
+            <span>Yearly Billing</span>
+            <span class="discount-badge">-25%</span>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer class="pricing-card__footer">
+        <ul>
+          <li>Unlimited websites</li>
+          <li>100% data ownership</li>
+          <li>Email reports</li>
+        </ul>
+        <button class="cta-button">Start my trial</button>
+      </footer>
+    </div>
+  </main>
+<div class="attribution">
+  Challenge by <a rel="noopener" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+  Coded by <a href="#">Raslan</a>.
+</div>
+<script src="main.js"></script>
+</body>
+</html>

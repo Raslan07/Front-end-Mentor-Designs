@@ -1,0 +1,336 @@
+/* ------------------- */
+    /* Custom Properties   */
+    /* ------------------- */
+    :root {
+      /* Primary */
+      --clr-primary-400: hsl(174, 86%, 45%);
+      /* Strong Cyan (Slider Background) */
+      --clr-primary-300: hsl(174, 77%, 80%);
+      /* Soft Cyan (Slider Bar) */
+
+      /* Neutral */
+      --clr-neutral-900: hsl(227, 35%, 25%);
+      /* Dark Desaturated Blue (Main Text, CTA) */
+      --clr-neutral-700: hsl(225, 20%, 60%);
+      /* Grayish Blue (Subheadings, Labels) */
+      --clr-neutral-400: hsl(223, 50%, 87%);
+      /* Light Grayish Blue (Toggle Background) */
+      --clr-neutral-300: hsl(224, 65%, 95%);
+      /* Light Grayish Blue (Empty Slider Bar) */
+      --clr-neutral-200: hsl(230, 100%, 99%);
+      /* Very Pale Blue (Main Background) */
+      --clr-neutral-100: hsl(0, 0%, 100%);
+      /* White (Card Background) */
+
+      /* Discount */
+      --clr-discount-text: hsl(15, 100%, 70%);
+      --clr-discount-bg: hsl(14, 92%, 95%);
+
+      /* Fonts */
+      --ff-body: 'Manrope', sans-serif;
+      --fs-body: 15px;
+      --fw-semi-bold: 600;
+      --fw-extra-bold: 800;
+    }
+
+    /* ------------------- */
+    /* Reset               */
+    /* ------------------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--ff-body);
+      font-size: var(--fs-body);
+      font-weight: var(--fw-semi-bold);
+      color: var(--clr-neutral-700);
+      background-color: var(--clr-neutral-200);
+      background-image: url('https://interactive-pricing-component-jet.vercel.app/images/bg-pattern.svg');
+      background-repeat: no-repeat;
+      background-size: 100vw 50vh;
+      min-height: 100vh;
+      display: grid;
+      place-content: center;
+      padding: 1rem;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: var(--fw-extra-bold);
+      color: var(--clr-neutral-900);
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background-color: var(--clr-neutral-300);
+    }
+
+    /* ------------------- */
+    /* Main Components     */
+    /* ------------------- */
+    .intro {
+      text-align: center;
+      padding: 3.5rem 1rem;
+      background-image: url('https://interactive-pricing-component-jet.vercel.app/images/pattern-circles.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .intro p {
+      margin-top: 0.75rem;
+    }
+
+    .pricing-card {
+      background-color: var(--clr-neutral-100);
+      border-radius: 8px;
+      box-shadow: 0 20px 40px -10px hsla(227, 35%, 25%, 0.15);
+      max-width: 540px;
+      margin-inline: auto;
+    }
+
+    .pricing-card__calculator {
+      padding: 2.5rem;
+    }
+
+    .calculator__row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .calculator__row--top {
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+
+    .pageviews {
+      font-weight: var(--fw-extra-bold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .price {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .price__amount {
+      font-size: 2.5rem;
+      font-weight: var(--fw-extra-bold);
+      color: var(--clr-neutral-900);
+    }
+
+    .billing-cycle {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    .discount-badge {
+      font-size: 0.65rem;
+      font-weight: var(--fw-extra-bold);
+      color: var(--clr-discount-text);
+      background-color: var(--clr-discount-bg);
+      padding: 0.2rem 0.5rem;
+      border-radius: 1rem;
+    }
+
+    .pricing-card__footer {
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pricing-card__footer ul {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .pricing-card__footer li {
+      padding-left: 1.75rem;
+      background-image: url('https://interactive-pricing-component-jet.vercel.app/images/icon-check.svg');
+      background-repeat: no-repeat;
+      background-position: left center;
+    }
+
+    .cta-button {
+      font-family: inherit;
+      font-weight: var(--fw-extra-bold);
+      color: var(--clr-primary-300);
+      background-color: var(--clr-neutral-900);
+      border: none;
+      padding: 0.8rem 2.8rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .cta-button:hover {
+      color: var(--clr-neutral-100);
+    }
+
+
+    /* ------------------- */
+    /* Slider & Toggle     */
+    /* ------------------- */
+
+    .slider-container {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      background: var(--clr-neutral-300);
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Slider Thumb */
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--clr-primary-400);
+      background-image: url('https://interactive-pricing-component-jet.vercel.app/images/icon-slider.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      box-shadow: 0 15px 30px hsla(174, 86%, 45%, 0.5);
+      transition: background-color 0.2s ease;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      /* Firefox */
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      background-color: var(--clr-primary-400);
+      background-image: url('https://interactive-pricing-component-jet.vercel.app/images/icon-slider.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      box-shadow: 0 15px 30px hsla(174, 86%, 45%, 0.5);
+      transition: background-color 0.2s ease;
+    }
+
+    input[type="range"]:active::-webkit-slider-thumb {
+      cursor: grabbing;
+      background-color: hsl(174, 77%, 65%);
+    }
+
+    input[type="range"]:active::-moz-range-thumb {
+      cursor: grabbing;
+      background-color: hsl(174, 77%, 65%);
+    }
+
+
+    /* Toggle Switch */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 22px;
+    }
+
+    .toggle-switch input {
+      display: none;
+    }
+
+    .toggle-switch__slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--clr-neutral-400);
+      border-radius: 22px;
+      transition: background-color 0.3s ease;
+    }
+
+    .toggle-switch__slider:hover {
+      background-color: var(--clr-primary-300);
+    }
+
+    .toggle-switch__slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: var(--clr-neutral-100);
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    input:checked+.toggle-switch__slider {
+      background-color: var(--clr-primary-400);
+    }
+
+    input:checked+.toggle-switch__slider:before {
+      transform: translateX(22px);
+    }
+
+    /* ------------------- */
+    /* Responsive Design   */
+    /* ------------------- */
+    @media (max-width: 550px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      .pricing-card__calculator {
+        padding: 2rem;
+      }
+
+      .calculator__row--top {
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .price {
+        order: 2;
+      }
+
+      .pageviews {
+        order: -1;
+      }
+
+      /* Reorder for mobile */
+
+      .billing-cycle {
+        margin-top: 2rem;
+      }
+
+      .pricing-card__footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+        padding: 2rem;
+      }
+    }
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
