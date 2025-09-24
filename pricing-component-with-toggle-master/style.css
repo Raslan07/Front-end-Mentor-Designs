@@ -41,6 +41,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 .our-pricing h1{
     font-size: 2rem;
@@ -214,6 +215,9 @@ input:checked+.toggle-switch__slider:before {
     .same-style{
         margin: 10px;
     }
+    .our-pricing{
+        margin-top: 25px;
+    }
 }
 @media screen and (max-width:939px) {
     .profeesional-plan{
@@ -222,5 +226,8 @@ input:checked+.toggle-switch__slider:before {
     }
     .same-style{
         margin: 10px;
+    }
+    .our-pricing{
+        margin-top: 25px;
     }
 }
