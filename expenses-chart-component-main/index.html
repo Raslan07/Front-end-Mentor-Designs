@@ -4,86 +4,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expenses Chart Component</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="normalize.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100..1000&display=swap" rel="stylesheet">
-  <title>Frontend Mentor | Expenses chart component</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-
-<main>
-  <div class="container">
-    <!-- Header Section -->
-    <header class="header">
-      <div class="left-side">
-        <h1>My balance</h1>
-        <p>$921.48</p>
+  <main>
+    <!-- Top Balance Component -->
+    <header class="balance-header">
+      <div class="balance-text">
+        <p class="balance-label">My balance</p>
+        <h1 class="balance-amount">$921.48</h1>
       </div>
-      <div class="right-side">
-        <span>
-          <img src="images/logo.svg" alt="">
-        </span>
+      <!-- CSS SVG-like Circles -->
+      <div class="logo-circles">
+        <div class="circle circle-fill"></div>
+        <div class="circle circle-outline"></div>
       </div>
     </header>
 
-    <!-- Main section -->
-    <section class="chart-board">
-      <h1>Spending - Last 7 days</h1>
-      
-        <div class="chart-dash">
-          <canvas  role="img" width="500" height="120" id="myChart"></canvas>
-        </div> 
+    <!-- Main Chart Component -->
+    <article class="chart-card">
+      <h2 class="chart-title">Spending - Last 7 days</h2>
 
-        <div class="footer">
-          <div class="left">
-            <h1>Total this month</h1>
-            <p>$478.33</p>
-          </div>
-          <div class="right">
-            <p>+2.4%</p>
-            <p>from last month</p>
-          </div>
+      <!-- Chart Bars (Injected by JS) -->
+      <div class="chart-area" id="chart-area">
+        <!-- JavaScript will populate this -->
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Footer -->
+      <footer class="chart-footer">
+        <div class="total-container">
+          <p class="total-label">Total this month</p>
+          <p class="total-amount">$478.33</p>
         </div>
-      
-    </section>
-  </div>
-</main>
+        <div class="trend-container">
+          <span class="trend-percent">+2.4%</span>
+          <p class="trend-text">from last month</p>
+        </div>
+      </footer>
+    </article>
+  </main>
 
+<script src="script.js"></script>
+</body>
 
-  <div class="attribution">
-    Challenge by
-    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-    Coded by <a href="#">Raslan</a>.
-  </div>
-  <script src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    const ctx = document.getElementById('myChart');
-
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat' , 'sun'],
-          datasets: [{
-            label: '$',
-            data: [17.45, 34.91, 52.36, 31.07, 23.39, 43.28 , 25.48],
-            backgroundColor: 'hsl(10, 79%, 65%)',
-            borderWidth: 1 , 
-            borderRadius: 6
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-  </script>
 </html>

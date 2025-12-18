@@ -1,24 +1,250 @@
+:root {
+      /* Colors */
+      --soft-red: hsl(10, 79%, 65%);
+      --cyan: hsl(186, 34%, 65%);
+      --dark-brown: hsl(25, 47%, 15%);
+      --medium-brown: hsl(28, 10%, 53%);
+      --cream: hsl(27, 66%, 92%);
+      --very-pale-orange: hsl(33, 100%, 98%);
+      --card-white: #ffffff;
 
+      /* Spacing & Layout */
+      --border-radius: 20px;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-.attribution { font-size: 11px; text-align: center; }
-.attribution a { color: hsl(228, 45%, 44%); }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
 
-.dm-sans {
-    font-family: "DM Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-}
+    main {
+      width: 100%;
+      max-width: 540px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
 
-*{
-    font-family: "DM Sans", sans-serif;
-}
+    /* --- Balance Header Card --- */
+    .balance-header {
+      background-color: var(--soft-red);
+      color: var(--card-white);
+      padding: 1.5rem 2rem;
+      border-radius: var(--border-radius);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-:root{
---Red500: hsl(10, 79%, 65%);
---Blue300: hsl(186, 34%, 65%);
---Brown950: hsl(25, 47%, 15%);
---Brown400: hsl(28, 10%, 53%);
---Red100: hsl(26, 66%, 93%);
-}
+    .balance-label {
+      font-size: 1rem;
+      font-weight: 400;
+      opacity: 0.9;
+      margin-bottom: 0.25rem;
+    }
+
+    .balance-amount {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    /* Logo Circles (CSS-only version of the SVG for portability) */
+    .logo-circles {
+      display: flex;
+    }
+
+    .circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    .circle-fill {
+      background-color: var(--dark-brown);
+      margin-right: -24px;
+      /* Overlap */
+      border: none;
+      z-index: 1;
+    }
+
+    .circle-outline {
+      border-color: var(--card-white);
+      z-index: 0;
+    }
+
+    /* --- Main Chart Card --- */
+    .chart-card {
+      background-color: var(--card-white);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      color: var(--dark-brown);
+    }
+
+    .chart-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 3.5rem;
+      /* Space for tooltips */
+    }
+
+    /* Chart Layout */
+    .chart-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      height: 200px;
+      /* Fixed visual height */
+      margin-bottom: 2rem;
+    }
+
+    .bar-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      /* Align bars to bottom */
+      width: 13%;
+      /* Distribute 7 days evenly */
+      height: 100%;
+      /* Ensure container fills the chart area */
+      position: relative;
+      cursor: pointer;
+    }
+
+    /* The visual bar */
+    .bar {
+      width: 100%;
+      background-color: var(--soft-red);
+      border-radius: 5px;
+      position: relative;
+      /* Anchor for tooltip */
+      transition: background-color 0.2s ease, opacity 0.2s ease;
+      /* Height is set dynamically via JS */
+    }
+
+    .bar:hover {
+      opacity: 0.7;
+      /* Hover state per design */
+    }
+
+    .bar.active {
+      background-color: var(--cyan);
+      /* Today's color */
+    }
+
+    .bar.active:hover {
+      opacity: 0.7;
+      background-color: var(--cyan);
+    }
+
+    /* Tooltip */
+    .tooltip {
+      position: absolute;
+      top: -45px;
+      /* Above the bar */
+      left: 50%;
+      /* Center horizontally relative to bar */
+      background-color: var(--dark-brown);
+      color: var(--very-pale-orange);
+      padding: 8px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      opacity: 0;
+      transform: translateX(-50%) translateY(10px);
+      /* Center and offset for animation */
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    .bar:hover .tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .day-label {
+      margin-top: 0.8rem;
+      color: var(--medium-brown);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    /* Footer Section */
+    .divider {
+      height: 2px;
+      background-color: var(--cream);
+      margin-bottom: 2rem;
+    }
+
+    .chart-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .total-label {
+      color: var(--medium-brown);
+      font-size: 1rem;
+    }
+
+    .total-amount {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .trend-container {
+      text-align: right;
+    }
+
+    .trend-percent {
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: block;
+    }
+
+    .trend-text {
+      color: var(--medium-brown);
+      font-size: 1rem;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 450px) {
+      .balance-header {
+        padding: 1.25rem;
+      }
+
+      .chart-card {
+        padding: 1.5rem;
+      }
+
+      .chart-title {
+        font-size: 1.5rem;
+      }
+
+      .total-amount {
+        font-size: 2rem;
+      }
+
+      .trend-percent {
+        font-size: 1rem;
+      }
+
+      .trend-text {
+        font-size: 0.9rem;
+      }
+    }
