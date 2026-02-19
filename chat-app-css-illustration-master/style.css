@@ -1,0 +1,330 @@
+/* ========================
+   CSS Variables & Setup
+   ======================== */
+:root {
+  /* Primary Colors */
+  --purple-300: hsl(276, 100%, 81%);
+  --purple-600: hsl(276, 55%, 52%);
+  --gray-500: hsl(270, 7%, 64%);
+  --gray-300: hsl(206, 6%, 79%);
+  --purple-950: hsl(271, 36%, 24%);
+  
+  /* Gradients */
+  --grad-pink-500: hsl(293, 100%, 63%);
+  --grad-purple-500: hsl(264, 100%, 61%);
+  
+  /* Secondary Colors */
+  --white: hsl(0, 100%, 100%);
+  --app-bg: hsl(270, 20%, 96%);
+  --pink-400: hsl(289, 100%, 72%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+  background-color: var(--app-bg);
+  color: var(--gray-500);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ========================
+   Background Shapes
+   ======================== */
+.bg-shape {
+  position: absolute;
+  width: 500px;
+  height: 800px;
+  border-radius: 250px;
+  z-index: -1;
+}
+
+.bg-shape-left {
+  background: linear-gradient(to bottom, var(--grad-pink-500), var(--grad-purple-500));
+  top: 0;
+  left: -150px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.bg-shape-right {
+  background-color: hsla(276, 55%, 52%, 0.05); /* very light purple */
+  bottom: 0;
+  right: -150px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* ========================
+   Main Layout Container
+   ======================== */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1000px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+  z-index: 1;
+}
+
+/* ========================
+   Phone Mockup UI
+   ======================== */
+.phone {
+  background-color: var(--app-bg);
+  width: 260px;
+  border-radius: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 10px solid var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.notch {
+  background-color: var(--white);
+  width: 140px;
+  height: 20px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* App Header */
+.app-header {
+  background: linear-gradient(to right, var(--grad-purple-500), var(--grad-pink-500));
+  padding: 2.5rem 1rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--white);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-btn {
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1.5px solid var(--white);
+}
+
+.user-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+}
+
+.user-status {
+  font-size: 0.55rem;
+  color: var(--purple-300);
+}
+
+.menu-dots {
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--purple-300);
+}
+
+/* Chat Area */
+.chat-area {
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.msg {
+  font-size: 0.55rem;
+  padding: 0.5rem;
+  max-width: 65%;
+  line-height: 1.4;
+}
+
+/* Left Bubbles */
+.msg.left {
+  background-color: hsla(276, 55%, 52%, 0.1);
+  color: var(--purple-600);
+  border-radius: 10px 10px 10px 4px;
+  align-self: flex-start;
+}
+
+/* Right Bubbles */
+.msg.right {
+  background-color: var(--white);
+  color: var(--gray-500);
+  border-radius: 10px 10px 4px 10px;
+  align-self: flex-end;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Images Row */
+.msg.images {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  max-width: 80%;
+}
+
+.msg.images img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+/* Price Options inside Chat */
+.msg.price-option {
+  background: linear-gradient(to right, var(--grad-pink-500), var(--grad-purple-500));
+  color: var(--white);
+  max-width: 75%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+}
+
+.radio-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--pink-400);
+}
+
+.duration {
+  flex-grow: 1;
+  opacity: 0.8;
+}
+
+.price {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Input Area */
+.message-input {
+  margin-top: 0.5rem;
+  position: relative;
+}
+
+.message-input input {
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  padding: 0.8rem 1rem;
+  font-family: inherit;
+  font-size: 0.6rem;
+  color: var(--purple-950);
+  outline: none;
+}
+
+.message-input input::placeholder {
+  color: var(--gray-300);
+}
+
+.submit-btn {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--purple-950);
+  color: var(--white);
+  border: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+/* ========================
+   Text Content Section
+   ======================== */
+.text-content {
+  text-align: center;
+  max-width: 450px;
+}
+
+.text-content h2 {
+  color: var(--purple-950);
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.text-content p {
+  line-height: 1.7;
+}
+
+/* ========================
+   Footer
+   ======================== */
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
+/* ========================
+   Responsive Desktop View
+   ======================== */
+@media (min-width: 900px) {
+  .container {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 8rem;
+  }
+
+  .text-content {
+    text-align: left;
+  }
+
+  .bg-shape-left {
+    left: -100px;
+  }
+
+  .bg-shape-right {
+    right: -100px;
+  }
+}
+
+.attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
